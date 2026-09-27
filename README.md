@@ -1,8 +1,8 @@
 # AI Dynamic Pricing & Demand Prediction System
 
-An AI-powered e-commerce analytics system that combines **demand forecasting, dynamic pricing, sales analytics, inventory monitoring, and machine learning** to support data-driven pricing decisions.
+An AI-powered e-commerce analytics system that combines demand forecasting, dynamic pricing, sales analytics, inventory monitoring, and machine learning to support data-driven pricing decisions.
 
-This project was developed as a **B.Tech Data Science & AI/ML project**.
+This project was developed as a B.Tech Data Science & AI/ML project.
 
 ---
 
@@ -17,13 +17,14 @@ The system analyzes historical e-commerce sales data and product information to:
 - Compare machine learning models
 - Provide real-time business analytics through a web dashboard
 
-The application uses a **FastAPI backend**, **React frontend**, **MySQL database**, and machine learning models for demand prediction.
+The application uses a FastAPI backend, React frontend, MySQL database, and machine learning models for demand prediction.
 
 ---
 
 ## ✨ Key Features
 
 ### 📊 Executive Dashboard
+
 - Total products
 - Total revenue
 - Total units sold
@@ -32,6 +33,7 @@ The application uses a **FastAPI backend**, **React frontend**, **MySQL database
 - Category-wise revenue breakdown
 
 ### 📦 Product Management
+
 - Product catalog
 - Category information
 - Current selling price
@@ -40,11 +42,13 @@ The application uses a **FastAPI backend**, **React frontend**, **MySQL database
 - Current stock
 
 ### 📈 Demand Forecasting
+
 - Product-wise demand prediction
 - 7, 14, and 30-day forecasting
 - Interactive demand forecast charts
 
 ### 💰 Dynamic Price Recommendation
+
 The pricing engine considers factors such as:
 
 - Current product price
@@ -61,12 +65,14 @@ The system generates:
 - Pricing explanation
 
 ### 📉 Sales Analytics
+
 - Monthly revenue trends
 - Category revenue analysis
 - Top-selling products
 - Interactive charts
 
 ### 📦 Inventory Management
+
 - Total stock units
 - Inventory value
 - Low-stock detection
@@ -74,6 +80,7 @@ The system generates:
 - Product-wise inventory status
 
 ### 🧾 Transaction Management
+
 - Sales transactions
 - Quantity sold
 - Selling price
@@ -82,6 +89,7 @@ The system generates:
 - Promotional transaction tracking
 
 ### 🤖 Machine Learning Model Evaluation
+
 The system evaluates multiple regression models:
 
 - Linear Regression
@@ -95,13 +103,11 @@ Model performance is evaluated using:
 - RMSE
 - R² Score
 
-The trained model is selected based on evaluation performance.
-
 ---
 
 ## 🧠 Machine Learning
 
-The project uses supervised machine learning for **demand prediction**.
+The project uses supervised machine learning for demand prediction.
 
 ### Models Evaluated
 
@@ -112,38 +118,94 @@ The project uses supervised machine learning for **demand prediction**.
 | Gradient Boosting | 12.9883 | 19.7446 | 0.7090 |
 | XGBoost | 13.0228 | 20.5646 | 0.6844 |
 
-The current trained system selects **Gradient Boosting** based on the recorded evaluation metrics.
+The current trained system selects Gradient Boosting based on the recorded evaluation metrics.
 
 ---
 
 ## 🏗️ System Architecture
 
+![System Architecture](docs/system-architecture.png)
+
+---
+
+## 🛠️ Technology Stack
+
+### Frontend
+
+- React.js
+- Vite
+- Tailwind CSS
+- Recharts
+- Lucide React
+- React Router
+
+### Backend
+
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- Uvicorn
+
+### Machine Learning
+
+- Scikit-learn
+- XGBoost
+- Pandas
+- NumPy
+- Joblib
+
+### Database
+
+- MySQL
+
+### Development Tools
+
+- VS Code
+- Git
+- GitHub
+- REST API
+- Swagger / OpenAPI
+
+---
+
+## 📁 Project Structure
+
 ```text
-                    ┌──────────────────────┐
-                    │    React Frontend    │
-                    │   Analytics Dashboard│
-                    └──────────┬───────────┘
-                               │
-                               │ REST API
-                               ▼
-                    ┌──────────────────────┐
-                    │    FastAPI Backend   │
-                    │                      │
-                    │ Products             │
-                    │ Sales                │
-                    │ Dashboard            │
-                    │ Prediction           │
-                    │ Pricing Engine       │
-                    │ ML Services          │
-                    └──────────┬───────────┘
-                               │
-              ┌────────────────┴────────────────┐
-              │                                 │
-              ▼                                 ▼
-     ┌──────────────────┐             ┌──────────────────┐
-     │   MySQL Database │             │  ML Model Layer  │
-     │                  │             │                  │
-     │ Products         │             │ Demand Prediction│
-     │ Sales             │             │ Model Evaluation │
-     │ Categories        │             │ Price Prediction│
-     └──────────────────┘             └──────────────────┘
+ai-dynamic-pricing/
+│
+├── backend/
+│   ├── app/
+│   │   ├── models/
+│   │   ├── routes/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   └── utils/
+│   │
+│   ├── ml/
+│   ├── saved_models/
+│   ├── requirements.txt
+│   ├── seed_data.py
+│   └── train.py
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   └── package.json
+│
+├── data/
+│   └── synthetic_ecommerce_data.csv
+│
+├── scripts/
+│   └── generate_dataset.py
+│
+├── docs/
+│   └── system-architecture.png
+│
+├── database_schema.sql
+├── README.md
+└── .gitignore
