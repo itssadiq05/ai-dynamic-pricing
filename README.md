@@ -1,11 +1,149 @@
-# AI Dynamic Pricing & Demand Prediction
+# AI Dynamic Pricing & Demand Prediction System
 
-B.Tech Data Science & AI/ML project.
+An AI-powered e-commerce analytics system that combines **demand forecasting, dynamic pricing, sales analytics, inventory monitoring, and machine learning** to support data-driven pricing decisions.
 
-## Run
-1. Create MySQL database using `database_schema.sql`.
-2. In `backend`, create venv, install requirements, copy `.env.example` to `.env`.
-3. From root run `python scripts/generate_dataset.py`.
-4. From backend run `python seed_data.py`.
-5. Run `uvicorn app.main:app --reload --port 8000`.
-6. In `frontend`, run `npm install` then `npm run dev`.
+This project was developed as a **B.Tech Data Science & AI/ML project**.
+
+---
+
+## 🚀 Project Overview
+
+The system analyzes historical e-commerce sales data and product information to:
+
+- Forecast future product demand
+- Recommend optimized product prices
+- Analyze revenue and sales trends
+- Monitor inventory levels
+- Compare machine learning models
+- Provide real-time business analytics through a web dashboard
+
+The application uses a **FastAPI backend**, **React frontend**, **MySQL database**, and machine learning models for demand prediction.
+
+---
+
+## ✨ Key Features
+
+### 📊 Executive Dashboard
+- Total products
+- Total revenue
+- Total units sold
+- Low-stock monitoring
+- Revenue trend visualization
+- Category-wise revenue breakdown
+
+### 📦 Product Management
+- Product catalog
+- Category information
+- Current selling price
+- Cost price
+- Competitor price
+- Current stock
+
+### 📈 Demand Forecasting
+- Product-wise demand prediction
+- 7, 14, and 30-day forecasting
+- Interactive demand forecast charts
+
+### 💰 Dynamic Price Recommendation
+The pricing engine considers factors such as:
+
+- Current product price
+- Competitor price
+- Cost price
+- Predicted demand
+
+The system generates:
+
+- Recommended price
+- Price adjustment percentage
+- Predicted demand
+- Expected revenue
+- Pricing explanation
+
+### 📉 Sales Analytics
+- Monthly revenue trends
+- Category revenue analysis
+- Top-selling products
+- Interactive charts
+
+### 📦 Inventory Management
+- Total stock units
+- Inventory value
+- Low-stock detection
+- Out-of-stock detection
+- Product-wise inventory status
+
+### 🧾 Transaction Management
+- Sales transactions
+- Quantity sold
+- Selling price
+- Discounts
+- Revenue
+- Promotional transaction tracking
+
+### 🤖 Machine Learning Model Evaluation
+The system evaluates multiple regression models:
+
+- Linear Regression
+- Random Forest
+- Gradient Boosting
+- XGBoost
+
+Model performance is evaluated using:
+
+- MAE
+- RMSE
+- R² Score
+
+The trained model is selected based on evaluation performance.
+
+---
+
+## 🧠 Machine Learning
+
+The project uses supervised machine learning for **demand prediction**.
+
+### Models Evaluated
+
+| Model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| Linear Regression | 16.0331 | 23.5261 | 0.5869 |
+| Random Forest | 13.0421 | 20.4320 | 0.6884 |
+| Gradient Boosting | 12.9883 | 19.7446 | 0.7090 |
+| XGBoost | 13.0228 | 20.5646 | 0.6844 |
+
+The current trained system selects **Gradient Boosting** based on the recorded evaluation metrics.
+
+---
+
+## 🏗️ System Architecture
+
+```text
+                    ┌──────────────────────┐
+                    │    React Frontend    │
+                    │   Analytics Dashboard│
+                    └──────────┬───────────┘
+                               │
+                               │ REST API
+                               ▼
+                    ┌──────────────────────┐
+                    │    FastAPI Backend   │
+                    │                      │
+                    │ Products             │
+                    │ Sales                │
+                    │ Dashboard            │
+                    │ Prediction           │
+                    │ Pricing Engine       │
+                    │ ML Services          │
+                    └──────────┬───────────┘
+                               │
+              ┌────────────────┴────────────────┐
+              │                                 │
+              ▼                                 ▼
+     ┌──────────────────┐             ┌──────────────────┐
+     │   MySQL Database │             │  ML Model Layer  │
+     │                  │             │                  │
+     │ Products         │             │ Demand Prediction│
+     │ Sales             │             │ Model Evaluation │
+     │ Categories        │             │ Price Prediction│
+     └──────────────────┘             └──────────────────┘

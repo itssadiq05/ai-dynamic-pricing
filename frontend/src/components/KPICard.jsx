@@ -1,30 +1,43 @@
 import React from 'react';
 
-const KPICard = ({ title, value, subtext, icon: Icon, color = "indigo" }) => {
-  const colorMap = {
-    indigo: "text-indigo-400 bg-indigo-500/10 border-indigo-500/20",
-    emerald: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
-    amber: "text-amber-400 bg-amber-500/10 border-amber-500/20",
-    rose: "text-rose-400 bg-rose-500/10 border-rose-500/20"
-  };
-
+const KPICard = ({
+  title,
+  value,
+  subtext,
+  icon: Icon,
+}) => {
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-sm hover:border-slate-700 transition-all">
-      <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">{title}</span>
-        {Icon && (
-          <div className={`p-2.5 rounded-xl border ${colorMap[color]}`}>
-            <Icon className="w-5 h-5" />
-          </div>
-        )}
+    <div className="group bg-[#111113] border border-white/[0.08] rounded-2xl p-5 transition-all duration-300 hover:bg-[#151517] hover:border-white/[0.12]">
+
+      {/* Top */}
+      <div className="flex items-start justify-between">
+
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.12em] text-[#636366] font-semibold">
+            {title}
+          </p>
+
+          <h3 className="mt-3 text-2xl lg:text-[27px] font-semibold tracking-[-0.03em] text-[#f5f5f7]">
+            {value}
+          </h3>
+        </div>
+
+        {/* Icon */}
+        <div className="w-10 h-10 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center">
+          <Icon className="w-[18px] h-[18px] text-[#d1d1d6]" />
+        </div>
+
       </div>
-      <div className="mt-4">
-        <h3 className="text-2xl font-bold text-slate-100">{value}</h3>
-        {subtext && <p className="text-xs text-slate-500 mt-1">{subtext}</p>}
+
+      {/* Bottom */}
+      <div className="mt-5 pt-4 border-t border-white/[0.06]">
+        <p className="text-xs text-[#636366]">
+          {subtext}
+        </p>
       </div>
+
     </div>
   );
 };
 
 export default KPICard;
-

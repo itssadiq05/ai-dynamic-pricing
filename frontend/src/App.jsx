@@ -1,7 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
+
 import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import DemandForecast from './pages/DemandForecast';
@@ -11,30 +13,72 @@ import Inventory from './pages/Inventory';
 import Transactions from './pages/Transactions';
 import MLModel from './pages/MLModel';
 
-function App() {
+const App = () => {
   return (
-    <Router>
-      <div className="flex min-h-screen bg-slate-950 text-slate-100">
+    <BrowserRouter>
+      <div className="flex min-h-screen bg-black text-[#f5f5f7]">
+
+        {/* Sidebar */}
         <Sidebar />
-        <div className="flex-1 flex flex-col">
+
+        {/* Main Area */}
+        <div className="flex-1 min-w-0 flex flex-col bg-black">
+
+          {/* Header */}
           <Header />
-          <main className="flex-1 overflow-y-auto">
+
+          {/* Page Content */}
+          <main className="flex-1 overflow-y-auto bg-black">
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/products" element={<Products />} />
-              <Route path="/forecast" element={<DemandForecast />} />
-              <Route path="/pricing" element={<PriceRecommendation />} />
-              <Route path="/analytics" element={<SalesAnalytics />} />
-              <Route path="/inventory" element={<Inventory />} />
-              <Route path="/transactions" element={<Transactions />} />
-              <Route path="/ml-model" element={<MLModel />} />
+
+              <Route
+                path="/"
+                element={<Dashboard />}
+              />
+
+              <Route
+                path="/products"
+                element={<Products />}
+              />
+
+              <Route
+                path="/forecast"
+                element={<DemandForecast />}
+              />
+
+              <Route
+                path="/pricing"
+                element={<PriceRecommendation />}
+              />
+
+              <Route
+                path="/analytics"
+                element={<SalesAnalytics />}
+              />
+
+              <Route
+                path="/inventory"
+                element={<Inventory />}
+              />
+
+              <Route
+                path="/transactions"
+                element={<Transactions />}
+              />
+
+              <Route
+                path="/ml-model"
+                element={<MLModel />}
+              />
+
             </Routes>
           </main>
+
         </div>
+
       </div>
-    </Router>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
-

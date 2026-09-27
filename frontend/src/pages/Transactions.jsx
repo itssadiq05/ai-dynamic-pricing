@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import {
+  Receipt,
+  Package,
+  TrendingUp,
+  RefreshCw,
+} from "lucide-react";
 
 const API_BASE = "http://localhost:8000";
 
@@ -24,9 +30,6 @@ const Transactions = () => {
 
       const data = await response.json();
 
-      // Supports both:
-      // [ ...sales ]
-      // { sales: [ ...sales ] }
       const salesData = Array.isArray(data)
         ? data
         : data.sales || data.data || [];
@@ -72,129 +75,217 @@ const Transactions = () => {
   );
 
   return (
-    <div className="p-8">
+    <div className="min-h-full bg-black px-6 py-7 lg:px-8 lg:py-8">
+
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-slate-100">
-          Transactions Ledger
+        <p className="text-[11px] uppercase tracking-[0.16em] text-[#636366] font-semibold mb-2">
+          Sales Records
+        </p>
+
+        <h1 className="text-3xl lg:text-[34px] font-semibold tracking-[-0.03em] text-[#f5f5f7]">
+          Transactions
         </h1>
 
-        <p className="mt-1 text-slate-400">
-          Historical sales and transaction records from MySQL database.
+        <p className="text-sm text-[#86868b] mt-1">
+          Historical sales and transaction records from MySQL
         </p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
-          <p className="text-sm text-slate-400">Total Transactions</p>
-          <h2 className="mt-3 text-3xl font-bold text-slate-100">
-            {transactions.length.toLocaleString("en-IN")}
-          </h2>
-          <p className="mt-2 text-sm text-slate-500">
+        {/* Transactions */}
+        <div className="bg-[#111113] border border-white/[0.08] rounded-2xl p-5">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.12em] text-[#636366] font-semibold">
+                Total Transactions
+              </p>
+
+              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-[#f5f5f7]">
+                {transactions.length.toLocaleString("en-IN")}
+              </h2>
+            </div>
+
+            <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center">
+              <Receipt className="w-4 h-4 text-[#d1d1d6]" />
+            </div>
+
+          </div>
+
+          <p className="mt-5 pt-4 border-t border-white/[0.06] text-xs text-[#636366]">
             Historical sales records
           </p>
+
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
-          <p className="text-sm text-slate-400">Units Sold</p>
-          <h2 className="mt-3 text-3xl font-bold text-slate-100">
-            {totalUnits.toLocaleString("en-IN")}
-          </h2>
-          <p className="mt-2 text-sm text-slate-500">
+        {/* Units */}
+        <div className="bg-[#111113] border border-white/[0.08] rounded-2xl p-5">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.12em] text-[#636366] font-semibold">
+                Units Sold
+              </p>
+
+              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-[#f5f5f7]">
+                {totalUnits.toLocaleString("en-IN")}
+              </h2>
+            </div>
+
+            <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center">
+              <Package className="w-4 h-4 text-[#d1d1d6]" />
+            </div>
+
+          </div>
+
+          <p className="mt-5 pt-4 border-t border-white/[0.06] text-xs text-[#636366]">
             Total quantity sold
           </p>
+
         </div>
 
-        <div className="rounded-2xl border border-slate-800 bg-slate-900/70 p-6">
-          <p className="text-sm text-slate-400">Total Revenue</p>
-          <h2 className="mt-3 text-3xl font-bold text-emerald-400">
-            {formatCurrency(totalRevenue)}
-          </h2>
-          <p className="mt-2 text-sm text-slate-500">
+        {/* Revenue */}
+        <div className="bg-[#111113] border border-white/[0.08] rounded-2xl p-5">
+
+          <div className="flex items-start justify-between">
+
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.12em] text-[#636366] font-semibold">
+                Total Revenue
+              </p>
+
+              <h2 className="mt-3 text-2xl font-semibold tracking-[-0.03em] text-[#f5f5f7]">
+                {formatCurrency(totalRevenue)}
+              </h2>
+            </div>
+
+            <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/[0.06] flex items-center justify-center">
+              <TrendingUp className="w-4 h-4 text-[#d1d1d6]" />
+            </div>
+
+          </div>
+
+          <p className="mt-5 pt-4 border-t border-white/[0.06] text-xs text-[#636366]">
             Cumulative sales revenue
           </p>
+
         </div>
 
       </div>
 
       {/* Main Table */}
-      <div className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/70">
+      <div className="overflow-hidden rounded-2xl border border-white/[0.08] bg-[#111113]">
 
-        <div className="border-b border-slate-800 px-6 py-5">
-          <h2 className="text-xl font-semibold text-slate-100">
-            Sales Transaction History
-          </h2>
+        <div className="border-b border-white/[0.06] px-5 py-5 lg:px-6">
 
-          <p className="mt-1 text-sm text-slate-400">
-            Real-time transaction records from the sales database.
-          </p>
+          <div className="flex items-center justify-between">
+
+            <div>
+              <h2 className="text-[17px] font-semibold text-[#f5f5f7]">
+                Sales Transaction History
+              </h2>
+
+              <p className="mt-1 text-xs text-[#636366]">
+                Real-time transaction records from the sales database
+              </p>
+            </div>
+
+            <button
+              onClick={fetchTransactions}
+              className="inline-flex items-center gap-2 rounded-xl border border-white/[0.08] bg-white/[0.04] px-3 py-2 text-xs font-medium text-[#a1a1a6] hover:bg-white/[0.08] hover:text-[#f5f5f7]"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              Refresh
+            </button>
+
+          </div>
+
         </div>
 
         {loading && (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-slate-400">
+          <div className="flex flex-col items-center justify-center py-20">
+
+            <div className="w-8 h-8 rounded-full border-2 border-[#2c2c2e] border-t-[#f5f5f7] animate-spin mb-4" />
+
+            <p className="text-sm text-[#86868b]">
               Loading transactions...
-            </div>
+            </p>
+
           </div>
         )}
 
         {!loading && error && (
           <div className="px-6 py-16 text-center">
-            <p className="text-red-400">{error}</p>
+
+            <p className="text-sm text-[#a1a1a6]">
+              {error}
+            </p>
 
             <button
               onClick={fetchTransactions}
-              className="mt-4 rounded-lg bg-indigo-600 px-5 py-2 text-sm font-medium text-white hover:bg-indigo-500"
+              className="mt-4 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2.5 text-sm font-medium text-black hover:bg-[#e5e5e7]"
             >
+              <RefreshCw className="w-4 h-4" />
               Retry
             </button>
+
           </div>
         )}
 
         {!loading && !error && transactions.length === 0 && (
-          <div className="px-6 py-16 text-center text-slate-400">
-            No transaction records found.
+          <div className="px-6 py-16 text-center">
+
+            <Receipt className="w-8 h-8 text-[#48484a] mx-auto mb-3" />
+
+            <p className="text-sm text-[#636366]">
+              No transaction records found.
+            </p>
+
           </div>
         )}
 
         {!loading && !error && transactions.length > 0 && (
           <div className="overflow-x-auto">
+
             <table className="w-full min-w-[1000px]">
 
               <thead>
-                <tr className="border-b border-slate-800 bg-slate-800/50">
+                <tr className="border-b border-white/[0.06]">
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-left text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     ID
                   </th>
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-left text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Product
                   </th>
 
-                  <th className="px-6 py-4 text-left text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-left text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Date
                   </th>
 
-                  <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-right text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Quantity
                   </th>
 
-                  <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-right text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Selling Price
                   </th>
 
-                  <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-right text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Discount
                   </th>
 
-                  <th className="px-6 py-4 text-right text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-right text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Revenue
                   </th>
 
-                  <th className="px-6 py-4 text-center text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <th className="px-5 py-3.5 text-center text-[10px] uppercase tracking-[0.12em] font-semibold text-[#636366]">
                     Promotion
                   </th>
 
@@ -202,75 +293,115 @@ const Transactions = () => {
               </thead>
 
               <tbody>
+
                 {transactions.map((transaction, index) => (
 
                   <tr
                     key={transaction.id || index}
-                    className="border-b border-slate-800/70 transition hover:bg-slate-800/30"
+                    className="border-b border-white/[0.05] last:border-b-0 hover:bg-white/[0.025] transition-colors"
                   >
 
-                    <td className="px-6 py-4 text-sm font-medium text-indigo-400">
-                      #{transaction.id || index + 1}
+                    {/* ID */}
+                    <td className="px-5 py-4">
+                      <span className="text-xs font-medium text-[#a1a1a6]">
+                        #{transaction.id || index + 1}
+                      </span>
                     </td>
 
-                    <td className="px-6 py-4">
-                      <div className="font-medium text-slate-100">
-                        {transaction.product_name ||
-                          transaction.product ||
-                          `Product #${transaction.product_id || "-"}`}
+                    {/* Product */}
+                    <td className="px-5 py-4">
+
+                      <div>
+                        <p className="text-sm font-medium text-[#f5f5f7]">
+                          {transaction.product_name ||
+                            transaction.product ||
+                            `Product #${
+                              transaction.product_id || "-"
+                            }`}
+                        </p>
+
+                        {transaction.product_id && (
+                          <p className="mt-1 text-[10px] text-[#48484a]">
+                            Product ID: {transaction.product_id}
+                          </p>
+                        )}
                       </div>
 
-                      {transaction.product_id && (
-                        <div className="mt-1 text-xs text-slate-500">
-                          Product ID: {transaction.product_id}
-                        </div>
-                      )}
                     </td>
 
-                    <td className="px-6 py-4 text-sm text-slate-300">
+                    {/* Date */}
+                    <td className="px-5 py-4 text-sm text-[#a1a1a6]">
                       {formatDate(transaction.date)}
                     </td>
 
-                    <td className="px-6 py-4 text-right text-sm font-medium text-slate-200">
-                      {Number(transaction.quantity_sold || 0).toLocaleString(
-                        "en-IN"
+                    {/* Quantity */}
+                    <td className="px-5 py-4 text-right text-sm font-medium text-[#d1d1d6]">
+                      {Number(
+                        transaction.quantity_sold || 0
+                      ).toLocaleString("en-IN")}
+                    </td>
+
+                    {/* Selling Price */}
+                    <td className="px-5 py-4 text-right text-sm text-[#a1a1a6]">
+                      {formatCurrency(
+                        transaction.selling_price
                       )}
                     </td>
 
-                    <td className="px-6 py-4 text-right text-sm text-slate-300">
-                      {formatCurrency(transaction.selling_price)}
+                    {/* Discount */}
+                    <td className="px-5 py-4 text-right text-sm text-[#a1a1a6]">
+                      {Number(
+                        transaction.discount_percent || 0
+                      ).toFixed(2)}
+                      %
                     </td>
 
-                    <td className="px-6 py-4 text-right text-sm text-slate-300">
-                      {Number(transaction.discount_percent || 0).toFixed(2)}%
-                    </td>
-
-                    <td className="px-6 py-4 text-right text-sm font-semibold text-emerald-400">
+                    {/* Revenue */}
+                    <td className="px-5 py-4 text-right text-sm font-semibold text-[#f5f5f7]">
                       {formatCurrency(transaction.revenue)}
                     </td>
 
-                    <td className="px-6 py-4 text-center">
+                    {/* Promotion */}
+                    <td className="px-5 py-4 text-center">
+
                       {transaction.is_promotion ? (
-                        <span className="inline-flex rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-medium text-emerald-400">
+                        <span className="inline-flex rounded-full bg-white/[0.07] border border-white/[0.08] px-2.5 py-1 text-[11px] font-medium text-[#d1d1d6]">
                           Yes
                         </span>
                       ) : (
-                        <span className="inline-flex rounded-full bg-slate-700/50 px-3 py-1 text-xs font-medium text-slate-400">
+                        <span className="inline-flex rounded-full bg-white/[0.03] border border-white/[0.06] px-2.5 py-1 text-[11px] font-medium text-[#636366]">
                           No
                         </span>
                       )}
+
                     </td>
 
                   </tr>
 
                 ))}
+
               </tbody>
 
             </table>
+
           </div>
         )}
 
       </div>
+
+      {/* Footer */}
+      <div className="mt-4 flex items-center justify-between px-1">
+
+        <p className="text-[11px] text-[#48484a]">
+          Transaction ledger and sales records
+        </p>
+
+        <span className="text-[11px] text-[#636366]">
+          {transactions.length.toLocaleString("en-IN")} records
+        </span>
+
+      </div>
+
     </div>
   );
 };

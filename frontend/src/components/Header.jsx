@@ -1,31 +1,60 @@
 import React from 'react';
-import { Bell, Search, UserCheck } from 'lucide-react';
+import { Bell, Search } from 'lucide-react';
 
 const Header = () => {
   return (
-    <header className="h-16 border-b border-slate-800 bg-slate-900/50 backdrop-blur-md px-8 flex items-center justify-between sticky top-0 z-10">
-      <div className="flex items-center gap-4 bg-slate-800/60 px-3 py-1.5 rounded-lg border border-slate-700/50 w-72">
-        <Search className="w-4 h-4 text-slate-400" />
-        <input
-          type="text"
-          placeholder="Search products, predictions..."
-          className="bg-transparent border-none outline-none text-sm text-slate-200 placeholder-slate-500 w-full"
-        />
-      </div>
+    <header className="apple-glass sticky top-0 z-30 w-full border-b border-white/[0.08] px-6 py-3">
+      <div className="flex items-center justify-between gap-4">
 
-      <div className="flex items-center gap-4">
-        <button className="p-2 text-slate-400 hover:text-slate-200 rounded-lg hover:bg-slate-800 transition-colors relative">
-          <Bell className="w-5 h-5" />
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-indigo-500 rounded-full"></span>
-        </button>
-        <div className="flex items-center gap-3 border-l border-slate-800 pl-4">
-          <div className="w-8 h-8 rounded-full bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-300 font-bold text-sm">
-            DS
+        {/* Search */}
+        <div className="relative w-full max-w-md">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+            <Search className="h-4 w-4 text-[#86868b]" />
           </div>
-          <div className="text-xs">
-            <p className="font-medium text-slate-200">Academic Demo</p>
-            <p className="text-slate-500">B.Tech 5th Sem</p>
+
+          <input
+            type="text"
+            placeholder="Search products, predictions..."
+            className="w-full bg-[#1c1c1e] text-[#f5f5f7] placeholder-[#86868b] text-sm rounded-full pl-10 pr-4 py-2.5 border border-white/[0.08] focus:outline-none focus:border-white/20"
+          />
+        </div>
+
+        {/* Right Section */}
+        <div className="flex items-center gap-4">
+
+          {/* Notification */}
+          <button
+            type="button"
+            className="relative w-9 h-9 rounded-full flex items-center justify-center text-[#a1a1a6] hover:text-white hover:bg-[#2c2c2e]"
+            aria-label="Notifications"
+          >
+            <Bell className="h-5 w-5" />
+
+            <span className="absolute top-2 right-2 h-1.5 w-1.5 rounded-full bg-white" />
+          </button>
+
+          {/* Divider */}
+          <div className="h-6 w-px bg-white/[0.08]" />
+
+          {/* User */}
+          <div className="flex items-center gap-3">
+
+            <div className="h-9 w-9 rounded-full bg-[#2c2c2e] border border-white/[0.10] flex items-center justify-center text-[#f5f5f7] font-semibold text-xs">
+              DS
+            </div>
+
+            <div className="hidden sm:block">
+              <p className="text-xs font-semibold text-[#f5f5f7] leading-tight">
+                Academic Demo
+              </p>
+
+              <p className="text-[11px] text-[#86868b] mt-0.5">
+                B.Tech 5th Sem
+              </p>
+            </div>
+
           </div>
+
         </div>
       </div>
     </header>
@@ -33,4 +62,3 @@ const Header = () => {
 };
 
 export default Header;
-
